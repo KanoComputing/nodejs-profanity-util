@@ -65,7 +65,7 @@ console.log(profanity.purify({
 	foo: 'poop',
 	bar: { nested: 'damn', arr: [ 'foo', 'poop' ] }
 }));
-[ { foo: 'p**p', bar: { nested: 'd**n', arr: [ 'foo', 'p**p' ] } }, [ 'poop', 'damn', 'poop' ] ]
+// [ { foo: 'p**p', bar: { nested: 'd**n', arr: [ 'foo', 'p**p' ] } }, [ 'poop', 'damn', 'poop' ] ]
 ```
 
 **Obscure mode, custom options**
@@ -92,7 +92,7 @@ console.log(profanity-util.purify({
 	foo: 'poop',
 	bar: { nested: 'damn', arr: [ 'foo', 'poop' ] }
 }));
-[ { foo: 'kitten', bar: { nested: 'unicorn', arr: [ 'foo', 'puppy' ] } }, [ 'poop', 'damn', 'poop' ] ]
+// [ { foo: 'kitten', bar: { nested: 'unicorn', arr: [ 'foo', 'puppy' ] } }, [ 'poop', 'damn', 'poop' ] ]
 ```
 
 ## Contribute
