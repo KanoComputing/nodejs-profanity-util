@@ -36,10 +36,10 @@ If an object is given as target, this method will recursively loop through its v
 
 By default forbidden swearwords will be obscured in this format: `a***b`, although setting `replace` option to `true` will activate replacement mode, which replaces each forbidden word with a random entry from a small list of inoffensive words (See `DEFAULT_REPLACEMENTS` in `lib/profanity.js`). This mode could be a fun and different approach to discourage and prevent swearing on your platform / app.
 
-The .purify method will return an array containing two values:
+The .purify method will return an Array containing two values:
 
-* `[0]` The purified String / Object / Array
-* `[1]` An Array containing all swearwords obscured / replaced
+1. The purified String / Object / Array
+2. An Array containing all swearwords obscured / replaced
 
 **Arguments**
 
