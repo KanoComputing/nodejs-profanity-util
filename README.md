@@ -19,7 +19,7 @@ Returns a list of forbidden words found in a string.
 
 **Example**
 
-```
+```javascript
 var profanity = require('profanity-util');
 
 console.log(profanity.check('Lorem ipsum foo bar poop test poop damn dolor sit..'));
@@ -55,7 +55,7 @@ The .purify method will return an array containing two values:
 
 **Obscure mode (default)**
 
-```
+```javascript
 var profanity = require('profanity-util');
 
 console.log(profanity.purify('lorem ipsum foo damn bar poop'));
@@ -70,7 +70,7 @@ console.log(profanity.purify({
 
 **Obscure mode, custom options**
 
-```
+```javascript
 var profanity = require('profanity-util');
 
 console.log(profanity.purify('foo poop', { obscureSymbol: '$' }));
@@ -82,7 +82,7 @@ console.log(profanity.purify('foo poop', { forbiddenList: [ 'foo', 'bar' ] }));
 
 **Replace mode (`{ replace: true }`)**
 
-```
+```javascript
 var profanity = require('profanity-util');
 
 console.log(profanity-util.purify('lorem ipsum foo damn bar poop'));
