@@ -2,7 +2,7 @@
 
 > Utility for detection, filtering and replacement / obscuration of forbidden words
 
-The list of swearwords used by default was taken from [here](https://gist.github.com/jamiew/1112488).
+The original list of swearwords used by default was taken from [here](https://gist.github.com/jamiew/1112488).
 
 ## Install
 
