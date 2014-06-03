@@ -4,7 +4,7 @@
 
 The original list of swearwords used by default was taken from [here](https://gist.github.com/jamiew/1112488).
 
-**Please note:** This small utility module is written to prevent the use of certain words in your content without keeping context in account. An improper use may compromise the meaning of your content. Keep in account when using.
+**Please note:** This small utility module is written to prevent or monitor the use of certain words in your content without keeping context in account. An improper use may compromise the meaning of your content. Keep in account when using.
 
 ## Install
 
