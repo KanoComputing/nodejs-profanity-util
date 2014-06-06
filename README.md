@@ -4,6 +4,8 @@
 
 The original list of swearwords used by default was taken from [here](https://gist.github.com/jamiew/1112488).
 
+**Please note:** This small utility module is written to prevent or monitor the use of certain words in your content without keeping context in account. An improper use may compromise the meaning of your content. Keep in account when using.
+
 ## Install
 
 `npm install profanity-util`
@@ -103,4 +105,4 @@ All contributions are welcome as long as tests are written.
 
 ## License
 
-Copyright (C) 2014 Kano Computing Ltd. License: [http://www.gnu.org/licenses/gpl-2.0.txt](http://www.gnu.org/licenses/gpl-2.0.txt) GNU General Public License v2
+Copyright (c) 2014 Kano Computing Ltd. - Released under The MIT License.
