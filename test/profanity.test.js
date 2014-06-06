@@ -10,20 +10,25 @@ var should = require('should'),
 describe('Profanity module', function () {
     describe('.validate(target)', function () {
  
-        it('returns null with no swearwords found in string', function (done) {
+        it('returns null with no swearwords found in string', function () {
             should(profanity.check('No swearwords here')).eql([]);
-            done();
         });
 
-        it('returns array of swearwords found in dirty string', function (done) {
+        it('returns array of swearwords found in dirty string', function () {
             var results = profanity.check('something damn something something poo something');
 
             should(results).eql([
                 'damn',
                 'poo'
             ]);
+        });
 
-            done();
+        it('doesn\'t target substrings', function () {
+            var detected = profanity.check('foo ass bar'),
+                notDetected = profanity.check('foo grass bar');
+
+            should(detected).have.length(1);
+            should(notDetected).have.length(0);
         });
 
         it('works equally for objects (Recursively) and arrays', function (done) {
