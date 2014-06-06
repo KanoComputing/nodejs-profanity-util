@@ -1,6 +1,6 @@
 {
   "name": "profanity-util",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Utility for detection, filtering and replacement / obscuration of forbidden words",
   "main": "lib/profanity.js",
   "scripts": {
