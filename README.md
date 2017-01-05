@@ -55,6 +55,7 @@ The .purify method will return an Array containing two values:
 * `obscureSymbol` - Symbol used to obscure words if `obscured` is set to true
 * `replace` - If set to true it will replace forbidden words (e.g., `poop -> rainbows`) instead of obscuring them
 * `map` - If true, reoccurring forbidden words will always be replaced by the same substitute (e.g., all `poop -> unicorn` and all `damn -> rainbows`). This only works in conjunction with `replace`.
+* `substrings` - If true, match substrings as well (false by default).
 
 **Examples**
 
