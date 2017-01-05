@@ -31,6 +31,14 @@ describe('Profanity module', function () {
             should(notDetected).have.length(0);
         });
 
+        it('does target substrings with the substrings option', function () {
+            var detected = profanity.check('foo ass bar', {substrings: true}),
+                alsoDetected = profanity.check('foo grass bar', {substrings: true});
+
+            should(detected).have.length(1);
+            should(alsoDetected).have.length(1);
+        });
+
         it('works equally for objects (Recursively) and arrays', function (done) {
             var results_obj = profanity.check({
                     foo: 'something damn',
@@ -59,7 +67,6 @@ describe('Profanity module', function () {
 
     });
     describe('.purify(target)', function () {
-
         it('works in obscure (default) mode on a simple string', function (done) {
             var result = profanity.purify('boob damn something poo');
 
@@ -88,6 +95,18 @@ describe('Profanity module', function () {
 
             done();
         });
+
+
+        it('works in obscure (default) mode on a simple string with substrings', function (done) {
+            var result = profanity.purify('boob damn something poo grass5', {substrings: true});
+
+            result[0].should.equal('b**b d**n something p*o gra*s5');
+            result[1].should.eql(['boob', 'damn', 'poo', 'ass']);
+
+
+            done();
+        });
+
 
         it('works in replace mode on a simple string', function (done) {
             var result = profanity.purify('boob damn something poo', {
