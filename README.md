@@ -53,7 +53,8 @@ The .purify method will return an Array containing two values:
 * `forbiddenList` - Array of forbidden terms to replace or obscure
 * `replacementsList` - Array of replacement words (To pick randomly from)
 * `obscureSymbol` - Symbol used to obscure words if `obscured` is set to true
-* `replace`- If set to true it will replace forbidden words (E.g. a*****b) instead of obscuring them
+* `replace` - If set to true it will replace forbidden words (e.g., `poop -> rainbows`) instead of obscuring them
+* `map` - If true, reoccurring forbidden words will always be replaced by the same substitute (e.g., all `poop -> unicorn` and all `damn -> rainbows`). This only works in conjunction with `replace`.
 
 **Examples**
 
@@ -78,10 +79,10 @@ console.log(profanity.purify({
 var profanity = require('profanity-util');
 
 console.log(profanity.purify('foo poop', { obscureSymbol: '$' }));
-// [ 'foo p$$p', 'poop' ]
+// [ 'foo p$$p', ['poop'] ]
 
 console.log(profanity.purify('foo poop', { forbiddenList: [ 'foo', 'bar' ] }));
-// [ 'f*o poop', 'foo' ]
+// [ 'f*o poop', ['foo'] ]
 ```
 
 **Replace mode (`{ replace: true }`)**
@@ -105,4 +106,4 @@ All contributions are welcome as long as tests are written.
 
 ## License
 
-Copyright (c) 2014 Kano Computing Ltd. - Released under The MIT License.
+Copyright (c) 2014, 2017 Kano Computing Ltd. - Released under The MIT License.

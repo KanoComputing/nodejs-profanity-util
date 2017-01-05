@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2014 Kano Computing Ltd.
+Copyright (C) 2014, 2017 Kano Computing Ltd.
 License: http://opensource.org/licenses/MIT The MIT License (MIT)
 */
 
@@ -8,8 +8,8 @@ var should = require('should'),
     profanity = require('../lib/profanity');
 
 describe('Profanity module', function () {
-    describe('.validate(target)', function () {
- 
+    describe('.check(target)', function () {
+
         it('returns null with no swearwords found in string', function () {
             should(profanity.check('No swearwords here')).eql([]);
         });
@@ -38,8 +38,8 @@ describe('Profanity module', function () {
                 }),
                 results_arr = profanity.check([
                     'something damn',
-                    [ 'something poo' ],
-                    { foo: [ { bar: 'something crap' } ] }
+                    ['something poo'],
+                    { foo: [{ bar: 'something crap' }] }
                 ]);
 
             should(results_obj).eql([
@@ -64,7 +64,7 @@ describe('Profanity module', function () {
             var result = profanity.purify('boob damn something poo');
 
             result[0].should.equal('b**b d**n something p*o');
-            result[1].should.eql([ 'boob', 'damn', 'poo' ]);
+            result[1].should.eql(['boob', 'damn', 'poo']);
 
 
             done();
@@ -84,7 +84,7 @@ describe('Profanity module', function () {
             result[0].bar.foo.should.equal('something b**b');
             result[0].test.should.equal('something d**n');
 
-            result[1].should.eql([ 'boob', 'poo', 'damn' ]);
+            result[1].should.eql(['boob', 'poo', 'damn']);
 
             done();
         });
@@ -95,7 +95,7 @@ describe('Profanity module', function () {
             });
 
             util.testPurified(result[0], '[ placeholder ] [ placeholder ] something [ placeholder ]');
-            result[1].should.eql([ 'boob', 'damn', 'poo' ]);
+            result[1].should.eql(['boob', 'damn', 'poo']);
 
 
             done();
@@ -117,10 +117,60 @@ describe('Profanity module', function () {
             util.testPurified(result[0].bar.foo, 'something [ placeholder ]');
             util.testPurified(result[0].test, 'something [ placeholder ]');
 
-            result[1].should.eql([ 'boob', 'poo', 'damn' ]);
+            result[1].should.eql(['boob', 'poo', 'damn']);
 
             done();
         });
 
+        it('works in replace mode with mapping on a simple string', function (done) {
+            var result = profanity.purify('boob damn something poo|boob damn something poo', {
+                replace: true,
+                map: true
+            }),
+                parts = result[0].split('|'),
+                seq = '[ placeholder ] [ placeholder ] something [ placeholder ]';
+
+            util.testPurified(result[0], seq + '|' + seq);
+            parts[0].should.eql(parts[1]);
+            result[1].should.eql(['boob', 'damn', 'poo', 'boob', 'damn', 'poo']);
+
+
+            done();
+        });
+
+        it('works in replace mode with mapping recursively with objects', function (done) {
+            var result = profanity.purify({
+                foo: { foo: 'damn something boob', bar: { foo: 'test poo damn' } },
+                bar: { foo: 'damn something boob', bar: { foo: 'test poo damn' } },
+                test: 'something damn boob'
+            }, {
+                replace: true,
+                map: true
+            });
+
+            result[0].should.have.keys('foo', 'bar', 'test');
+
+            // .foo
+            result[0].foo.should.have.keys('foo', 'bar');
+            util.testPurified(result[0].foo.foo, '[ placeholder ] something [ placeholder ]');
+            result[0].foo.bar.should.have.keys('foo');
+            util.testPurified(result[0].foo.bar.foo, 'test [ placeholder ] [ placeholder ]');
+
+            // .bar
+            result[0].bar.should.have.keys('foo', 'bar');
+            util.testPurified(result[0].bar.foo, '[ placeholder ] something [ placeholder ]');
+            result[0].bar.bar.should.have.keys('foo');
+            util.testPurified(result[0].bar.bar.foo, 'test [ placeholder ] [ placeholder ]');
+
+            util.testPurified(result[0].test, 'something [ placeholder ] [ placeholder ]');
+
+            result[0].foo.should.eql(result[0].bar);
+
+            result[1].should.eql(['damn', 'boob', 'poo', 'damn',
+                                  'damn', 'boob', 'poo', 'damn',
+                                  'damn', 'boob']);
+
+            done();
+        });
     });
 });
