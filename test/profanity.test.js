@@ -39,6 +39,32 @@ describe('Profanity module', function () {
             should(alsoDetected).have.length(1);
         });
 
+        it('works with a custom list (the legacy way)', function () {
+            var string = 'something daisy something something lol woot woot something',
+                list = ['daisy', 'lol', 'woot'],
+                results = profanity.check(string, list);
+
+            should(results).eql([
+                'daisy',
+                'lol',
+                'woot',
+                'woot'
+            ]);
+        });
+
+        it('works with a custom list (via options)', function () {
+            var string = 'something daisy something something lol woot woot something',
+                list = ['daisy', 'lol', 'woot'],
+                results = profanity.check(string, {forbiddenList: list});
+
+            should(results).eql([
+                'daisy',
+                'lol',
+                'woot',
+                'woot'
+            ]);
+        });
+
         it('works equally for objects (Recursively) and arrays', function (done) {
             var results_obj = profanity.check({
                     foo: 'something damn',
