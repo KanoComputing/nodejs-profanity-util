@@ -1,6 +1,6 @@
 {
   "name": "profanity-util",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Utility for detection, filtering and replacement / obscuration of forbidden words",
   "main": "lib/profanity.js",
   "scripts": {
@@ -9,10 +9,10 @@
   "author": "Tancredi Trugenberger",
   "license": "MIT",
   "dependencies": {
-    "underscore": "~1.6.0"
+    "underscore": "~1.8.x"
   },
   "devDependencies": {
-    "mocha": "~1.20.x",
-    "should": "~3.3.x"
+    "mocha": "~3.2.x",
+    "should": "~11.1.x"
   }
 }

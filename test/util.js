@@ -1,14 +1,14 @@
 /*
-Copyright (C) 2014 Kano Computing Ltd.
+Copyright (C) 2014, 2017 Kano Computing Ltd.
 License: http://opensource.org/licenses/MIT The MIT License (MIT)
 */
 
 var defaultExp = '(bunnies|butterfly|kitten|love|gingerly|flowers|puppy|joyful|rainbows|unicorn)';
 
-function testPurified (str, format, exp) {
+function testPurified(str, format, exp) {
     exp = exp || defaultExp;
 
-    var regex = new RegExp('^' + format.replace(/(\[ placeholder \])/g, exp) + '$');
+    var regex = new RegExp('^' + format.replace(/(\[ placeholder \])/g, exp) + '$', 'i');
     if (!regex.test(str)) {
         throw new Error('\'' + str + '\'' + ' doesn\'t match the format \'' + format + '\'');
     }

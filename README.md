@@ -1,5 +1,7 @@
 # Node.js Profanity Utility
 
+[![Build Status](https://travis-ci.org/KanoComputing/nodejs-profanity-util.svg?branch=master)](https://travis-ci.org/KanoComputing/nodejs-profanity-util)
+
 > Utility for detection, filtering and replacement / obscuration of forbidden words
 
 The original list of swearwords used by default was taken from [here](https://gist.github.com/jamiew/1112488).
@@ -12,14 +14,19 @@ The original list of swearwords used by default was taken from [here](https://gi
 
 ## API
 
-### `profanity.check(target_string, [ forbidden_list ])`
+### `profanity.check(targetString, [ options ])`
 
 Returns a list of forbidden words found in a string.
 
 **Arguments**
 
-* `target_string` - String to search
-* `forbidden_list` (Optional) - Array containing forbidden terms
+* `targetString` - String to search
+* `options` (Optional) - Listed below
+
+**Options**
+
+* `forbiddenList` - Array containing forbidden terms
+* `substrings` - If true, match substrings as well (false by default).
 
 **Example**
 
@@ -53,7 +60,9 @@ The .purify method will return an Array containing two values:
 * `forbiddenList` - Array of forbidden terms to replace or obscure
 * `replacementsList` - Array of replacement words (To pick randomly from)
 * `obscureSymbol` - Symbol used to obscure words if `obscured` is set to true
-* `replace`- If set to true it will replace forbidden words (E.g. a*****b) instead of obscuring them
+* `replace` - If set to true it will replace forbidden words (e.g., `poop -> rainbows`) instead of obscuring them
+* `map` - If true, reoccurring forbidden words will always be replaced by the same substitute (e.g., all `poop -> unicorn` and all `damn -> rainbows`). This only works in conjunction with `replace`.
+* `substrings` - If true, match substrings as well (false by default).
 
 **Examples**
 
@@ -78,10 +87,10 @@ console.log(profanity.purify({
 var profanity = require('profanity-util');
 
 console.log(profanity.purify('foo poop', { obscureSymbol: '$' }));
-// [ 'foo p$$p', 'poop' ]
+// [ 'foo p$$p', ['poop'] ]
 
 console.log(profanity.purify('foo poop', { forbiddenList: [ 'foo', 'bar' ] }));
-// [ 'f*o poop', 'foo' ]
+// [ 'f*o poop', ['foo'] ]
 ```
 
 **Replace mode (`{ replace: true }`)**
@@ -105,4 +114,4 @@ All contributions are welcome as long as tests are written.
 
 ## License
 
-Copyright (c) 2014 Kano Computing Ltd. - Released under The MIT License.
+Copyright (c) 2014, 2017 Kano Computing Ltd. - Released under The MIT License.
