@@ -133,15 +133,13 @@ describe('Profanity module', function () {
             done();
         });
 
-
         it('works in replace mode on a simple string', function (done) {
-            var result = profanity.purify('boob damn something poo', {
+            var result = profanity.purify('Boob damn something poo', {
                 replace: true
             });
 
             util.testPurified(result[0], '[ placeholder ] [ placeholder ] something [ placeholder ]');
-            result[1].should.eql(['boob', 'damn', 'poo']);
-
+            result[1].should.eql(['Boob', 'damn', 'poo']);
 
             done();
         });

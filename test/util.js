@@ -8,7 +8,7 @@ var defaultExp = '(bunnies|butterfly|kitten|love|gingerly|flowers|puppy|joyful|r
 function testPurified(str, format, exp) {
     exp = exp || defaultExp;
 
-    var regex = new RegExp('^' + format.replace(/(\[ placeholder \])/g, exp) + '$');
+    var regex = new RegExp('^' + format.replace(/(\[ placeholder \])/g, exp) + '$', 'i');
     if (!regex.test(str)) {
         throw new Error('\'' + str + '\'' + ' doesn\'t match the format \'' + format + '\'');
     }
