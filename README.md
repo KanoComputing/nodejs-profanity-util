@@ -12,14 +12,19 @@ The original list of swearwords used by default was taken from [here](https://gi
 
 ## API
 
-### `profanity.check(target_string, [ forbidden_list ])`
+### `profanity.check(targetString, [ options ])`
 
 Returns a list of forbidden words found in a string.
 
 **Arguments**
 
-* `target_string` - String to search
-* `forbidden_list` (Optional) - Array containing forbidden terms
+* `targetString` - String to search
+* `options` (Optional) - Listed below
+
+**Options**
+
+* `forbiddenList` - Array containing forbidden terms
+* `substrings` - If true, match substrings as well (false by default).
 
 **Example**
 
