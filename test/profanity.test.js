@@ -40,13 +40,13 @@ describe('Profanity module', function () {
         });
 
         it('substring matching is less strict with the substrings option "lite", e.g not matching "liverpool"', function () {
-            var detected = profanity.check( 'foo ass bar', { substrings: "lite" } ),
+            var detected = profanity.check('foo ass bar', {substrings: "lite"}),
                 alsoDetected = profanity.check('foo grass bar liverpool grasscutta', {substrings: true}),
-                notDetected = profanity.check( 'foo grass bar liverpool grasscutta', { substrings: "lite" });
+                notDetected = profanity.check('foo grass bar liverpool grasscutta', {substrings: "lite"});
 
-            should( detected ).have.length( 1 );
-            should(alsoDetected).have.length( 3 );            
-            should( notDetected ).have.length( 0 );
+            should(detected).have.length(1);
+            should(alsoDetected).have.length(3);            
+            should(notDetected).have.length(0);
         });
 
         it('works with a custom list (the legacy way)', function () {

@@ -26,7 +26,10 @@ Returns a list of forbidden words found in a string.
 **Options**
 
 * `forbiddenList` - Array containing forbidden terms
-* `substrings` - If true, match substrings as well (false by default).
+* `substrings: [ true | "lite" ]` - If set will match substrings as well (default `false`).
+* `subStringList`: If the `substrings` property is set to `"lite"` a second, less strict word list can be passed in for use in the substring profanity filter.
+
+The `"lite"` option is intended to reduce false positives in substring matching, where you may wish to use substring matching but allow terms such as "liverpool" or "classic". __PLEASE NOTE__ This may become the default setting for substring matching in future versions.
 
 **Example**
 
@@ -35,7 +38,20 @@ var profanity = require('profanity-util');
 
 console.log(profanity.check('Lorem ipsum foo bar poop test poop damn dolor sit..'));
 // [ 'poop', 'poop', 'damn' ]
+
+// With substring matching
+var profanity = require( 'profanity-util', { substring: true } );
+
+console.log(profanity.check('Lorem ipsum liverpool foo bar poop test classic damn dolor sit..'));
+// [ 'poo' 'poop', 'ass', 'damn' ]
+
+// With substring matching set to "lite"
+var profanity = require( 'profanity-util', { substring: "lite" } );
+
+console.log(profanity.check('Lorem ipsum liverpool foo bar poop test classic damn dolor sit..'));
+// [ 'poop', 'damn' ]
 ```
+Note the [default word list](lib/sub_string_words.json) for "lite" substring matching still returns a match for the ["Seven Dirty Words"](https://en.wikipedia.org/wiki/Seven_dirty_words) and their cousins.
 
 ### `profanity.purify(target, [ options ])`
 
