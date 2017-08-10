@@ -39,6 +39,16 @@ describe('Profanity module', function () {
             should(alsoDetected).have.length(1);
         });
 
+        it('substring matching is less strict with the substrings option "lite", e.g not matching "liverpool"', function () {
+            var detected = profanity.check( 'foo ass bar', { substrings: "lite" } ),
+                alsoDetected = profanity.check('foo grass bar liverpool grasscutta', {substrings: true}),
+                notDetected = profanity.check( 'foo grass bar liverpool grasscutta', { substrings: "lite" });
+
+            should( detected ).have.length( 1 );
+            should(alsoDetected).have.length( 3 );            
+            should( notDetected ).have.length( 0 );
+        });
+
         it('works with a custom list (the legacy way)', function () {
             var string = 'something daisy something something lol woot woot something',
                 list = ['daisy', 'lol', 'woot'],
